@@ -33,7 +33,7 @@ postRoutes.route("/posts").post(verifyToken, async (request: Request, response: 
         title: request.body.title,
         description: request.body.description,
         content: request.body.content,
-        author: request.body.author,
+        author: request.body.user._id,
         dateCreated: request.body.dateCreated
     }
     const data = await db.collection<Post>("posts").insertOne(mongoObject)
@@ -82,6 +82,7 @@ function verifyToken(request: Request, response: Response, next: NextFunction) {
             response.sendStatus(403).json({ message: "Invalid token" });
             return
         }
+        request.body = request.body || {};
         request.body.user = user;
         next();
     })

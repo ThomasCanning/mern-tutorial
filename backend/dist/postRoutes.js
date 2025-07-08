@@ -74,6 +74,7 @@ function verifyToken(request, response, next) {
             response.sendStatus(403).json({ message: "Invalid token" });
             return;
         }
+        request.body = request.body || {};
         request.body.user = user;
         next();
     });

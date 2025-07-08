@@ -6,6 +6,7 @@ export default interface User {
     password: string;
     joinDate?: Date;
     posts?: Post[]
+    _id?: string;
 }
 
 export type LoginResponse =
